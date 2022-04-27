@@ -1,63 +1,93 @@
+board = {'1': '1','2': '2','3': '3',
+'4': '4','5': '5','6': '6',
+'7': '7','8': '8','9': '9'}
+
 def main():
-    print('hi')
-    grid_list = create_grid()
-    grid = display_grid(grid_list)
-    score = ''
+    turn = 'x'
+    count = 0
     
-    while score != True:
-        player1 = turn_x(grid_list)
-        print(grid_list)
+    for i in range(10):
+        display_board(board)
+        print()
+        move = input(f"it is {turn}'s turn. Where do you want to move? ")
+        print()
 
-        player2 = turn_o(grid_list)
-        print(grid_list)
-
-        score = winner(grid_list,score)
-
-    print('The game is over')
-
-#creates a list with the number of positions on grid
-def create_grid():
-    grid = []
-    for i in range(1,10):
-        grid.append(i)
-    return grid
-
-# #using the list it can display the grid using print statements and indeces
-def display_grid(grid):
-    print(f'{grid[0]}|{grid[1]}|{grid[2]}')
-    print('-+-+-')
-    print(f'{grid[3]}|{grid[4]}|{grid[5]}')
-    print('-+-+-')
-    print(f'{grid[6]}|{grid[7]}|{grid[8]}')
-
-def turn_x(grid_list):
-    position = int(input("x's turn to choose a square (1-9) "))
-    grid_list[position - 1] = 'x'
-    board = display_grid(grid_list)
-    return board
+        if board[move] != 'x' or board[move] != 'o':
+            board[move] = turn
+            count += 1
+                
+        if count >= 5:
+            if board['7'] == board['8'] == board['9'] : # across the bottom
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')                
+                break
+            elif board['4'] == board['5'] == board['6'] : # across the middle
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break
+            elif board['1'] == board['2'] == board['3']: # across the top
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break
+            elif board['1'] == board['4'] == board['7'] : # down the left side
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break
+            elif board['2'] == board['5'] == board['8'] : # down the middle
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break
+            elif board['3'] == board['6'] == board['9'] : # down the right side
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break 
+            elif board['7'] == board['5'] == board['3'] : # diagonal
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break
+            elif board['1'] == board['5'] == board['9'] : # diagonal
+                display_board(board)
+                print()
+                print('Game Over')                
+                print(f'{turn} won the game!')  
+                break 
         
+        if count == 9:
+            print("Game over! It's a tie")
+        
+        if turn == 'x':
+            turn = 'o'
+        else:
+            turn = 'x'
+    
 
-def turn_o(grid_list):
-    position = int(input("o's turn to choose a square (1-9) "))
-    grid_list[position - 1] = 'o'
-    board = display_grid(grid_list)
-    return board
-
-def winner(grid_list,score):
-    if grid_list[0] == grid_list[1] == grid_list[0]:
-        return score == True
-    elif grid_list[3] == grid_list[4] == grid_list[5]:
-        return score == True
-    elif grid_list[6] == grid_list[7] == grid_list[8]:
-        return score == True
-    elif grid_list[0] == grid_list[3] == grid_list[6]:
-        return score == True
-    elif grid_list[1] == grid_list[4] == grid_list[7]:
-        return score == True
-    elif grid_list[2] == grid_list[5] == grid_list[8]:
-        return score == True
-    else:
-        return score == False
+def display_board(board):
+    print(board['1']+ '|' + board['2'] + '|' + board['3'])
+    print('-+-+-')
+    print(board['4']+ '|' + board['5'] + '|' + board['6']) 
+    print('-+-+-')
+    print(board['7']+ '|' + board['8'] + '|' + board['9'])
 
 if __name__ == '__main__':
-    main()
+    
+    play_again = ''
+    while play_again != 'no':
+        main()
+        play_again = input('would you like to play again (yes/no)? ').lower()
+        if play_again == 'yes':
+            board = {'1': '1','2': '2','3': '3',
+            '4': '4','5': '5','6': '6',
+            '7': '7','8': '8','9': '9'}
