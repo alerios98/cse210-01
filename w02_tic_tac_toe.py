@@ -2,20 +2,29 @@ def main():
     print('hi')
     grid_list = create_grid()
     grid = display_grid(grid_list)
-    
-    while grid_list != (
-    grid_list[0] == grid_list[1] == grid_list[0] or grid_list[3] == grid_list[4] == grid_list[5] or
-    grid_list[6] == grid_list[7] == grid_list[8] or grid_list[0] == grid_list[3] == grid_list[6] or
-    grid_list[1] == grid_list[4] == grid_list[7] or grid_list[2] == grid_list[5] == grid_list[8]
-    ):
+    score = ''
 
+    while score != 'win':
         player_turn_x = turn_x(grid_list)
         grid = display_grid(player_turn_x)
 
         player_turn_y = turn_y(grid_list)
         grid = display_grid(player_turn_y)
-    
 
+        if grid_list[0] == grid_list[1] == grid_list[0]:
+            score = 'win'
+        elif grid_list[3] == grid_list[4] == grid_list[5]:
+            score = 'win'
+        elif grid_list[6] == grid_list[7] == grid_list[8]:
+            score = 'win'
+        elif grid_list[0] == grid_list[3] == grid_list[6]:
+            score = 'win'
+        elif grid_list[1] == grid_list[4] == grid_list[7]:
+            score = 'win'
+        elif grid_list[2] == grid_list[5] == grid_list[8]:
+            score = 'win'
+    
+    print('The game is over')
 
 #creates a list with the number of positions on grid
 def create_grid():
