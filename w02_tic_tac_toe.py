@@ -3,27 +3,16 @@ def main():
     grid_list = create_grid()
     grid = display_grid(grid_list)
     score = ''
-
-    while score != 'win':
-        player_turn_x = turn_x(grid_list)
-        grid = display_grid(player_turn_x)
-
-        player_turn_y = turn_y(grid_list)
-        grid = display_grid(player_turn_y)
-
-        if grid_list[0] == grid_list[1] == grid_list[0]:
-            score = 'win'
-        elif grid_list[3] == grid_list[4] == grid_list[5]:
-            score = 'win'
-        elif grid_list[6] == grid_list[7] == grid_list[8]:
-            score = 'win'
-        elif grid_list[0] == grid_list[3] == grid_list[6]:
-            score = 'win'
-        elif grid_list[1] == grid_list[4] == grid_list[7]:
-            score = 'win'
-        elif grid_list[2] == grid_list[5] == grid_list[8]:
-            score = 'win'
     
+    while score != True:
+        player1 = turn_x(grid_list)
+        print(grid_list)
+
+        player2 = turn_o(grid_list)
+        print(grid_list)
+
+        score = winner(grid_list,score)
+
     print('The game is over')
 
 #creates a list with the number of positions on grid
@@ -44,13 +33,31 @@ def display_grid(grid):
 def turn_x(grid_list):
     position = int(input("x's turn to choose a square (1-9) "))
     grid_list[position - 1] = 'x'
-    return grid_list
+    board = display_grid(grid_list)
+    return board
         
 
-def turn_y(grid_list):
+def turn_o(grid_list):
     position = int(input("o's turn to choose a square (1-9) "))
     grid_list[position - 1] = 'o'
-    return grid_list
+    board = display_grid(grid_list)
+    return board
+
+def winner(grid_list,score):
+    if grid_list[0] == grid_list[1] == grid_list[0]:
+        return score == True
+    elif grid_list[3] == grid_list[4] == grid_list[5]:
+        return score == True
+    elif grid_list[6] == grid_list[7] == grid_list[8]:
+        return score == True
+    elif grid_list[0] == grid_list[3] == grid_list[6]:
+        return score == True
+    elif grid_list[1] == grid_list[4] == grid_list[7]:
+        return score == True
+    elif grid_list[2] == grid_list[5] == grid_list[8]:
+        return score == True
+    else:
+        return score == False
 
 if __name__ == '__main__':
     main()
